@@ -21,6 +21,13 @@ test.describe("Signup", () => {
       expect(user?.role).toBe("student");
       const credentialAccounts = user?.accounts.filter((a) => a.providerId === "credential") ?? [];
       expect(credentialAccounts).toHaveLength(1);
+
+      // The databaseHooks.user.create.after hook in lib/auth.ts should have
+      // seeded a starter patient. If this regresses, new users land on an
+      // empty home and get stuck until an instructor shares a link.
+      expect(user?.patientActors ?? []).toHaveLength(1);
+      expect(user?.patientActors[0]?.name).toBe("Philip Walters");
+      expect(user?.patientActors[0]?.ownerId).toBe(user?.id);
     } finally {
       await deleteUserByEmail(email);
     }

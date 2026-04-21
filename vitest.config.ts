@@ -9,6 +9,9 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     setupFiles: ['./vitest.setup.ts'],
+    // e2e/ is Playwright territory and imports @playwright/test's test.describe,
+    // which blows up under vitest. Keep vitest to unit + integration tests.
+    exclude: ['**/node_modules/**', '**/dist/**', 'e2e/**'],
     pool: 'forks',
     poolOptions: {
       forks: {

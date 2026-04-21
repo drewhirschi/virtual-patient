@@ -13,6 +13,6 @@ export async function deleteUserByEmail(email: string): Promise<void> {
 export async function getUserByEmail(email: string) {
   return prisma.user.findUnique({
     where: { email },
-    include: { accounts: true },
+    include: { accounts: true, patientActors: true },
   });
 }
