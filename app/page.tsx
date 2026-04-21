@@ -19,12 +19,17 @@ export default async function Home() {
 
   // Render different views based on role
   if (userRole === "student" || (userRole === "admin" && adminView === "student")) {
-    // Student view: show their conversation history
-    const sessions = await getStudentSessions()
+    // Student view: show their conversation history + any patients they own
+    // (seeded on signup) so they always have a starting point.
+    const [sessions, myPatients] = await Promise.all([
+      getStudentSessions(),
+      getMyPatientActors(),
+    ])
 
     return (
       <StudentHome
         sessions={sessions}
+        myPatients={myPatients}
         userName={authUser.name}
         isAdmin={userRole === "admin"}
       />

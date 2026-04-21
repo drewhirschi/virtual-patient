@@ -30,10 +30,9 @@ export async function requireAuth() {
 
 export async function requireInstructorAuth() {
   const user = await requireAuth();
-  //TODO: Add instructor and admin check
-  // if (user.role !== "instructor" && user.role !== "admin") {
-  //   throw new Error("Unauthorized");
-  // }
+  if (user.role !== "instructor" && user.role !== "admin") {
+    throw new Error("Unauthorized");
+  }
   return user;
 }
 

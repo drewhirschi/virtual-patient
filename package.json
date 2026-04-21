@@ -20,7 +20,9 @@
     "db:format": "prisma format && prisma-case-format --file prisma/schema.prisma --map-table-case snake --map-field-case snake",
     "with-env": "dotenv -e .env.local --",
     "test": "vitest --run",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.45",
@@ -89,6 +91,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22",
     "@types/pg": "^8.11.10",

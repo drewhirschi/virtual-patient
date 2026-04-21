@@ -20,14 +20,18 @@ enum UserRole {
 
 // Better Auth tables
 model User {
-  id            String   @id @default(nanoid())
+  id            String    @id @default(nanoid())
   name          String?
-  email         String   @unique
-  emailVerified Boolean  @default(false) @map("email_verified")
+  email         String    @unique
+  emailVerified Boolean   @default(false) @map("email_verified")
   image         String?
-  role          UserRole @default(student)
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
+  role          UserRole  @default(student)
+  // Admin plugin fields (better-auth admin plugin)
+  banned        Boolean   @default(false)
+  banReason     String?   @map("ban_reason")
+  banExpires    DateTime? @map("ban_expires")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
 
   sessions                      Session[]
   accounts                      Account[]

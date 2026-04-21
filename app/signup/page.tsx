@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { createAccount } from "@/lib/actions/accounts"
+import { signUp } from "@/lib/auth-client"
 import { claimChatSession } from "@/lib/actions/sessions"
 import { toast } from "sonner"
 
@@ -46,8 +46,21 @@ function SignUpForm() {
         setLoading(true)
 
         try {
-            await createAccount(email, password, name)
-            
+            const result = await signUp.email({
+                email,
+                password,
+                name,
+            })
+
+            if (result.error) {
+                setError(result.error.message || "Failed to sign up")
+                setLoading(false)
+                return
+            }
+
+            // Starter patient is seeded server-side via Better Auth's
+            // databaseHooks.user.create.after (see lib/auth.ts).
+
             // Successful signup - claim session if sessionId exists
             if (sessionId) {
                 try {

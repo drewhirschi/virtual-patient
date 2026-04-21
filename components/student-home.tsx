@@ -41,6 +41,7 @@ type SessionWithDetails = {
 
 interface StudentHomeProps {
   sessions: SessionWithDetails[]
+  myPatients: { id: string; name: string; age: number; slug: string }[]
   userName: string | null
   isAdmin?: boolean
 }
@@ -66,7 +67,7 @@ function groupSessionsByPatient(sessions: SessionWithDetails[]) {
   return Array.from(grouped.values())
 }
 
-export default function StudentHome({ sessions, userName, isAdmin = false }: StudentHomeProps) {
+export default function StudentHome({ sessions, myPatients, userName, isAdmin = false }: StudentHomeProps) {
   const router = useRouter()
   const [isSigningOut, setIsSigningOut] = useState(false)
 
@@ -203,10 +204,39 @@ export default function StudentHome({ sessions, userName, isAdmin = false }: Stu
                 <MessageSquare className="h-8 w-8 text-blue-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">No conversations yet</h3>
-              <p className="text-sm text-gray-600 text-center max-w-md mb-4">
-                Get started by visiting a patient actor link shared by your instructor.
-                Your conversations will appear here automatically.
-              </p>
+              {myPatients.length > 0 ? (
+                <>
+                  <p className="text-sm text-gray-600 text-center max-w-md mb-6">
+                    Start a practice session with one of your patients below, or visit a
+                    link shared by your instructor.
+                  </p>
+                  <div className="w-full max-w-md space-y-2">
+                    {myPatients.map((patient) => (
+                      <Link
+                        key={patient.id}
+                        href={`/chat/${patient.slug}`}
+                        className="block"
+                      >
+                        <div className="flex items-center justify-between px-4 py-3 rounded-lg border bg-white hover:bg-gray-50 transition-colors group">
+                          <div>
+                            <div className="font-medium text-gray-900">{patient.name}</div>
+                            <div className="text-xs text-gray-500">Age {patient.age}</div>
+                          </div>
+                          <Button size="sm" className="gap-1">
+                            <Plus className="h-4 w-4" />
+                            Start session
+                          </Button>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <p className="text-sm text-gray-600 text-center max-w-md mb-4">
+                  Get started by visiting a patient actor link shared by your instructor.
+                  Your conversations will appear here automatically.
+                </p>
+              )}
             </CardContent>
           </Card>
         ) : (

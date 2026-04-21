@@ -19,7 +19,7 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  
+
   // Get sessionId and returnUrl from query params
   const sessionId = searchParams.get("sessionId")
   const returnUrl = searchParams.get("returnUrl") || "/"
