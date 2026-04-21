@@ -3,7 +3,7 @@
 import type React from "react"
 import { createContext, useContext } from "react"
 import { useSession, signOut as authSignOut } from "@/lib/auth-client"
-import type { User } from "@/lib/generated/client"
+import type { User } from "@prisma/client"
 
 interface AuthContextType {
   user: User | null

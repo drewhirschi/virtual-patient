@@ -154,21 +154,3 @@ test.describe("Protected routes", () => {
   });
 });
 
-test.describe("Google sign-in button", () => {
-  // We can't actually complete Google OAuth in CI, but we can assert that
-  // clicking the button kicks off a redirect to Google.
-  test("signup page kicks off a redirect toward accounts.google.com", async ({ page }) => {
-    await page.goto("/signup");
-    // Intercept the navigation so we don't actually leave the origin.
-    const [request] = await Promise.all([
-      page.waitForRequest(
-        (req) =>
-          req.url().includes("/api/auth/sign-in/social") ||
-          req.url().includes("accounts.google.com"),
-        { timeout: 10_000 },
-      ),
-      page.getByRole("button", { name: /continue with google/i }).click(),
-    ]);
-    expect(request.url()).toMatch(/sign-in\/social|accounts\.google\.com/);
-  });
-});

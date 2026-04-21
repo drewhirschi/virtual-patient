@@ -4,7 +4,7 @@ import { ArrowLeft, Home } from "lucide-react"
 import ChatInterface from "@/components/chat-interface"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import type { PatientActor } from "@/lib/generated/client"
+import type { PatientActor } from "@prisma/client"
 import type { Message } from "@/lib/types"
 
 interface PublicChatClientProps {

@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { signOut } from "@/lib/auth-client"
-import type { PatientActor } from "@/lib/generated/client"
+import type { PatientActor } from "@prisma/client"
 
 type SubmissionWithDetails = {
   id: string

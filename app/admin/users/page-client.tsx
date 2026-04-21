@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/select"
 import { signOut, authClient, useSession } from "@/lib/auth-client"
 import { toast } from "sonner"
-import type { UserRole } from "@/lib/generated/prisma"
+import type { UserRole } from "@prisma/client"
 import { updateUserRole } from "@/lib/actions/admin"
 
 type UserData = {

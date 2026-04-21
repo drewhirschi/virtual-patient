@@ -37,7 +37,7 @@ export default async function PublicChatPage({
         if (session && session.patientActor.id === patientActor.id) {
             existingSession = {
                 id: session.id,
-                messages: session.messages as Message[],
+                messages: session.messages as unknown as Message[],
                 isSubmitted: !!session.submittedSession,
             }
         }

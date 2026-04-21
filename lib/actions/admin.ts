@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/prisma"
 import { requireAuth } from "@/lib/auth-utils"
-import type { UserRole } from "@/lib/generated/prisma"
+import type { UserRole } from "@prisma/client"
 
 /**
  * Require admin authentication
