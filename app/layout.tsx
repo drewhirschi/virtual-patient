@@ -7,7 +7,7 @@ import { Providers } from "@/components/providers"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Patient Actor - Medical Education Simulation",
+  title: "Virtual Patient - Medical Education Simulation",
   description: "Interactive patient simulation for medical education and diagnosis training",
   generator: "v0.dev",
 }
