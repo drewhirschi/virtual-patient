@@ -49,7 +49,7 @@ export const auth = betterAuth({
     : ["http://localhost:3000"],
   plugins: [
     admin({
-      defaultRole: "student",
+      defaultRole: "instructor",
       adminRoles: ["admin"],
       impersonationSessionDuration: 60 * 60, // 1 hour
     }),
